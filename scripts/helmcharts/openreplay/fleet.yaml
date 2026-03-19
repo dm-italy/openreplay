@@ -1,6 +1,6 @@
 defaultNamespace: openreplay
 dependsOn:
-  - name: databases
+  - name: openreplay-scripts-helmcharts-databases
 helm:
   releaseName: openreplay
   valuesFiles:
