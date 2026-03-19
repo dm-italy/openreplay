@@ -37,12 +37,13 @@ helm:
           setAsDefaultIngress: false
         ingressClassResource:
           name: openreplay
+        hostNetwork: false
+        hostPort:
+          enable: true
+          http: 30880
+          https: 30444
         service:
-          type: LoadBalancer
-          annotations:
-            metallb.universe.tf/address-pool: rustdesk-pool
-          loadBalancerIP: "10.0.35.192"
-          externalTrafficPolicy: "Local"
+          type: ClusterIP
           ports:
             http: 80
             https: 443
