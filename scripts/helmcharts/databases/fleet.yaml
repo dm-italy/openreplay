@@ -3,3 +3,12 @@ helm:
   releaseName: databases
   valuesFiles:
     - values-fleet.yaml
+  values:
+    postgresql:
+      enabled: false
+    clickhouse:
+      enabled: false
+    kafka:
+      enabled: false
+    vault:
+      enabled: false
