@@ -28,6 +28,7 @@ helm:
     ingress-nginx:
       enabled: true
       controller:
+        kind: daemonset
         image:
           tag: 5.3.1-alpine
         enableSnippets: true
