@@ -10,4 +10,4 @@ spec:
     # Il tuo ClusterIssuer si chiama 'letsencrypt', non 'letsencrypt-prod'
     kind: ClusterIssuer
   dnsNames:
-    - openrelay.dmc.ovh
+    - openreplay.dmc.ovh
