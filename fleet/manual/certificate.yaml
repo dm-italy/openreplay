@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: openreplay-ssl
+  namespace: openreplay
+spec:
+  secretName: openreplay-ssl
+  issuerRef:
+    name: letsencrypt
+    # Il tuo ClusterIssuer si chiama 'letsencrypt', non 'letsencrypt-prod'
+    kind: ClusterIssuer
+  dnsNames:
+    - openrelay.dmc.ovh

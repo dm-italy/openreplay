@@ -8,7 +8,7 @@ metadata:
     {{- include "frontend.labels" . | nindent 4 }}
   annotations:
     nginx.org/mergeable-ingress-type: "master"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: "letsencrypt"
     # Pass through X-Forwarded headers from upstream proxy (Cloudflare, LB, etc.)
     nginx.org/proxy-set-headers: "X-Forwarded-Proto, X-Forwarded-Port"
 spec:
