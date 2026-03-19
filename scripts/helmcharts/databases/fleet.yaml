@@ -1,8 +1,6 @@
 defaultNamespace: openreplay
 helm:
   releaseName: databases
-  valuesFiles:
-    - values-fleet.yaml
   values:
     postgresql:
       enabled: false
@@ -12,3 +10,47 @@ helm:
       enabled: false
     vault:
       enabled: false
+    redis:
+      enabled: true
+      image:
+        registry: ghcr.io
+        repository: openreplay/valkey
+        tag: 8
+      fullnameOverride: redis
+      usePassword: false
+      cluster:
+        enabled: false
+      redis:
+        resources:
+          limits:
+            cpu: 250m
+            memory: 512Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+      master:
+        persistence:
+          storageClass: "cephfs-rwx"
+          size: 2Gi
+    minio:
+      enabled: true
+      image:
+        registry: ghcr.io
+        repository: openreplay/minio
+        tag: 2025
+      fullnameOverride: minio
+      global:
+        minio:
+          accessKey: "46a520a35247ffc72d92c05453221ded6086f156"
+          secretKey: "78fb2219e5ff83e19d9d4aa8dfaf01df7e6fbf8c"
+      resources:
+        limits:
+          cpu: 250m
+          memory: 512Mi
+        requests:
+          cpu: 50m
+          memory: 128Mi
+      persistence:
+        enabled: true
+        storageClass: "cephfs-rwx"
+        size: 5Gi
