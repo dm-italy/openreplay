@@ -155,15 +155,15 @@ helm:
       orAppSecrets:
         existingSecret: ""
       email:
-        emailHost: ""
-        emailPort: "587"
-        emailUser: ""
-        emailPassword: ""
+        emailHost: "postal.dmc.ovh"
+        emailPort: "25"
+        emailUser: "dm/dmconsulting"
+        emailPassword: "2E3L3A7JML4PLW85pNo75y3M"
         emailUseTls: "true"
         emailUseSsl: "false"
         emailSslKey: ""
         emailSslCert: ""
-        emailFrom: "OpenReplay<do-not-reply@openreplay.com>"
+        emailFrom: "OpenReplay<no-reply-or@dmconsulting.it>"
       ee-components:
         enabled: false
       enterpriseEditionLicense: ""
