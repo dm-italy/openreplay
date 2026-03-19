@@ -1,6 +1,5 @@
 defaultNamespace: openreplay
 helm:
   releaseName: databases
-  chart: "../../scripts/helmcharts/databases"
   valuesFiles:
-    - values.yaml
+    - values-fleet.yaml

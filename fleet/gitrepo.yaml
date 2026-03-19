@@ -9,13 +9,12 @@ metadata:
   name: openreplay
   namespace: fleet-default
 spec:
-  # CAMBIA con il tuo repo git
-  repo: https://github.com/TUO-ORG/openreplay.git
-  branch: main
+  repo: https://github.com/dm-italy/openreplay.git
+  branch: deploy/rancher-fleet
   # Se repo privato:
   # clientSecretName: git-credentials
   paths:
-    - fleet/01-databases
-    - fleet/02-openreplay
+    - scripts/helmcharts/databases
+    - scripts/helmcharts/openreplay
   targets:
     - clusterSelector: {}

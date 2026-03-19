@@ -1,0 +1,7 @@
+defaultNamespace: openreplay
+dependsOn:
+  - name: databases
+helm:
+  releaseName: openreplay
+  valuesFiles:
+    - values-fleet.yaml
