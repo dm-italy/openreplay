@@ -94,7 +94,7 @@ helm:
             proxy-max-temp-file-size: "2048m"
     global:
       postgresql:
-        postgresqlPassword: "xK9#mPvL2$nQwR7@jF4hT8&bYc5!eZs"
+        postgresqlPassword: "rK9mPvL2nQwR7jF4hT8bYc5eZsWx3pD"
         postgresqlHost: "10.0.35.8"
         postgresqlPort: "5432"
         postgresqlUser: "openreplay"
