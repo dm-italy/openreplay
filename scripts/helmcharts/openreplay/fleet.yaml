@@ -80,7 +80,7 @@ helm:
               add_header Referrer-Policy "same-origin" always;
             use-gzip: "true"
             enable-real-ip: "true"
-            real-ip-header: "X-Forwarded-For"
+            real-ip-header: "proxy_protocol"
             set-real-ip-from: "0.0.0.0/0"
             ssl-redirect: "false"
             client-max-body-size: "64m"
@@ -88,7 +88,7 @@ helm:
             proxy-connect-timeout: "120s"
             proxy-read-timeout: "300s"
             proxy-send-timeout: "300s"
-            proxy-protocol: "false"
+            proxy-protocol: "true"
             use-forwarded-headers: "true"
             proxy-buffering: "true"
             proxy-buffers: "32 64k"

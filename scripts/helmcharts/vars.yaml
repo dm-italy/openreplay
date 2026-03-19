@@ -99,7 +99,7 @@ ingress-nginx: &ingress-nginx
       entries:
         use-gzip: "true"
         enable-real-ip: "true"
-        real-ip-header: "X-Forwarded-For"
+        real-ip-header: "proxy_protocol"
         set-real-ip-from: "0.0.0.0/0"
         ssl-redirect: "false"
         client-max-body-size: "64m"
@@ -108,7 +108,7 @@ ingress-nginx: &ingress-nginx
         proxy-connect-timeout: "120s"
         proxy-read-timeout: "300s"
         proxy-send-timeout: "300s"
-        proxy-protocol: "false"
+        proxy-protocol: "true"
         use-forwarded-headers: "true"
 
 # Application specific variables
