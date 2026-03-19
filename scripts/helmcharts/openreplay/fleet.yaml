@@ -52,8 +52,9 @@ helm:
           httpsPort:
             enable: true
             port: 443
+        defaultTLS:
+          secret: "openreplay/openreplay-ssl"
         extraArgs:
-          default-server-secret: "openreplay/openreplay-ssl"
           enable-ewma: "true"
         pod:
           extraLabels:
