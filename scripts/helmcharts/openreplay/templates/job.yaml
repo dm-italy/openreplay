@@ -285,9 +285,13 @@ spec:
           - -c
         args:
           - |
-            lowVersion=16.4
+            lowVersion=16.0
             highVersion=17
-            pg_version=`psql -c "SHOW server_version;" -t | tr -d ' '`
+            pg_version=`psql -c "SHOW server_version_num;" -t | tr -d ' '`
+            # Convert numeric version (e.g. 160013) to dotted format (16.13)
+            major=$((pg_version / 10000))
+            minor=$((pg_version % 10000))
+            pg_version="${major}.${minor}"
             echo $pg_version |\
               awk -v pg_version=$pg_version -v low="$lowVersion" -v high="$highVersion" -F. '{
                 split(low, lowArr, ".");
