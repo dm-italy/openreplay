@@ -23,6 +23,8 @@ helm:
         registry: ghcr.io/openreplay
         repository: minio
         tag: "2025"
+    connector:
+      enabled: false
     ingress-nginx:
       enabled: true
       controller:
