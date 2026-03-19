@@ -156,7 +156,7 @@ helm:
         existingSecret: ""
       email:
         emailHost: "postal.dmc.ovh"
-        emailPort: "25"
+        emailPort: "587"
         emailUser: "dm/dmconsulting"
         emailPassword: "2E3L3A7JML4PLW85pNo75y3M"
         emailUseTls: "true"
