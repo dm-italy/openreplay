@@ -1,0 +1,8 @@
+defaultNamespace: openreplay
+dependsOn:
+  - name: 01-databases
+helm:
+  releaseName: openreplay
+  chart: "../../scripts/helmcharts/openreplay"
+  valuesFiles:
+    - values.yaml

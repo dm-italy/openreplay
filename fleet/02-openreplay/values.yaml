@@ -1,0 +1,171 @@
+fromVersion: "v1.26.0"
+forceMigration: true
+
+postgresql:
+  image:
+    registry: ghcr.io/openreplay
+    repository: postgres
+    tag: 17
+
+clickhouse:
+  password: ""
+  image:
+    registry: docker.io
+    repository: clickhouse/clickhouse-server
+    tag: 25.9-alpine
+
+minio:
+  forceInit: false
+  image:
+    registry: ghcr.io/openreplay
+    repository: minio
+    tag: "2025"
+
+ingress-nginx:
+  enabled: true
+  controller:
+    image:
+      tag: 5.3.1-alpine
+    enableSnippets: true
+    ingressClass:
+      name: openreplay
+      create: true
+      setAsDefaultIngress: false
+    ingressClassResource:
+      name: openreplay
+    service:
+      type: LoadBalancer
+      annotations:
+        metallb.universe.tf/address-pool: rustdesk-pool
+      loadBalancerIP: "10.0.35.192"
+      externalTrafficPolicy: "Local"
+      ports:
+        http: 80
+        https: 443
+      httpPort:
+        enable: true
+        port: 80
+      httpsPort:
+        enable: true
+        port: 443
+    extraArgs:
+      default-server-secret: "openreplay/openreplay-ssl"
+      enable-ewma: "true"
+    pod:
+      extraLabels:
+        app.kubernetes.io/component: controller
+    config:
+      entries:
+        worker-connections: "1024"
+        http-snippets: |-
+          map $arg_peerId $sessionid {
+            default "";
+            "~.*-(\d+)(?:-.*|$)" $1;
+          }
+        server-tokens: "false"
+        server-snippets: |-
+          location /healthz {
+            access_log off;
+            return 200 "ok";
+          }
+          add_header X-XSS-Protection "1; mode=block" always;
+          add_header X-Content-Type-Options "nosniff" always;
+          add_header Referrer-Policy "same-origin" always;
+        use-gzip: "true"
+        enable-real-ip: "true"
+        real-ip-header: "X-Forwarded-For"
+        set-real-ip-from: "0.0.0.0/0"
+        ssl-redirect: "false"
+        client-max-body-size: "64m"
+        client-body-buffer-size: "512k"
+        proxy-connect-timeout: "120s"
+        proxy-read-timeout: "300s"
+        proxy-send-timeout: "300s"
+        proxy-protocol: "false"
+        use-forwarded-headers: "true"
+        proxy-buffering: "true"
+        proxy-buffers: "32 64k"
+        proxy-buffer-size: "64k"
+        proxy-busy-buffers-size: "128k"
+        proxy-max-temp-file-size: "2048m"
+
+global:
+  postgresql:
+    postgresqlPassword: "xK9#mPvL2$nQwR7@jF4hT8&bYc5!eZs"
+    postgresqlHost: "10.0.35.8"
+    postgresqlPort: "5432"
+    postgresqlUser: "openreplay"
+    postgresqlDatabase: "openreplay"
+  clickhouse:
+    enabled: false
+    chHost: "10.0.35.31"
+    username: default
+    password: ""
+    use_tls: false
+    service:
+      webPort: 8123
+      dataPort: 9000
+  kafka:
+    kafkaHost: "kafka.openreplay.svc.cluster.local"
+    zookeeperHost: "databases-zookeeper.openreplay.svc.cluster.local"
+    zookeeperNonTLSPort: 2181
+    kafkaPort: "9092"
+    kafkaUseSsl: "false"
+    maxMessageBytes: _3145728
+  redis:
+    enabled: true
+    redisHost: "redis-master.openreplay.svc.cluster.local"
+    redisPort: "6379"
+  connector:
+    enabled: false
+  openReplayContainerRegistry: "public.ecr.aws/p1t3u8a3"
+
+  assistKey: "a6b35c22e5aabf1734121cf6ff1107e85b22c5b2"
+  assistJWTSecret: "b53d2161cab6ebdc3a9b985f61a1bc0b059cb11d"
+  jwtSecret: "a0d7d5a938e8209b6aa6e914ef5bea418e374cb3"
+  jwtSpotSecret: "82260aab2cc58a3358bf8eefad6b41363b226af5"
+  tokenSecret: "0b215e878ced63c8283df4f759b410b475b5f6e4"
+  jwtRefreshSecret: "94c939f6ea23fb0d484e0fb7abbedc17e00e5254"
+  jwtSpotRefreshSecret: "8447bf78ab5308d06b0eee69e0768a03cf180d8a"
+
+  pvcRWXName: "openreplay-shared-storage"
+  domainName: "openrelay.dmc.ovh"
+  ORSecureAccess: true
+  orTmpDir: "/openreplay/storage/nfs"
+
+  s3:
+    region: "us-east-1"
+    endpoint: "http://minio.openreplay.svc.cluster.local:9000"
+    assetsBucket: "sessions-assets"
+    recordingsBucket: "mobs"
+    sourcemapsBucket: "sourcemaps"
+    spotsBucket: "spots"
+    assistRecordsBucket: "records"
+    vaultBucket: "vault-data"
+    accessKey: "46a520a35247ffc72d92c05453221ded6086f156"
+    secretKey: "78fb2219e5ff83e19d9d4aa8dfaf01df7e6fbf8c"
+
+  email:
+    emailHost: ""
+    emailPort: "587"
+    emailUser: ""
+    emailPassword: ""
+    emailUseTls: "true"
+    emailUseSsl: "false"
+    emailSslKey: ""
+    emailSslCert: ""
+    emailFrom: "OpenReplay<do-not-reply@openreplay.com>"
+
+  ee-components:
+    enabled: false
+  enterpriseEditionLicense: ""
+  license:
+    existingSecret: "license-key"
+    existingSecretKey: "or-license-key"
+
+  ingress:
+    controller:
+      ingressClass:
+        name: openreplay
+      ingressClassResource:
+        name: openreplay
