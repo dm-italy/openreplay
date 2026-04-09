@@ -30,7 +30,7 @@ helm:
             memory: 64Mi
       master:
         persistence:
-          storageClass: "cephfs-rwx"
+          storageClass: "ceph-dm-cephfs"
           size: 2Gi
     minio:
       enabled: true
@@ -52,5 +52,5 @@ helm:
           memory: 128Mi
       persistence:
         enabled: true
-        storageClass: "cephfs-rwx"
+        storageClass: "ceph-dm-cephfs"
         size: 5Gi

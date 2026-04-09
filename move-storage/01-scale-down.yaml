@@ -1,0 +1,11 @@
+## Questo file è solo un riferimento per i comandi da eseguire.
+## Non è un manifest Kubernetes applicabile direttamente.
+##
+## Scala a zero i workload per evitare scritture durante la migrazione:
+##
+## kubectl -n openreplay scale deploy minio --replicas=0
+## kubectl -n openreplay scale sts redis-master --replicas=0
+##
+## Verifica che i pod siano terminati:
+## kubectl -n openreplay get pods -l app.kubernetes.io/name=minio
+## kubectl -n openreplay get pods -l app.kubernetes.io/name=redis
