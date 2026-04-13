@@ -39,6 +39,7 @@ helm:
         repository: openreplay/minio
         tag: 2025
       fullnameOverride: minio
+      defaultBuckets: "sessions-assets, mobs, sourcemaps, spots, records, vault-data"
       global:
         minio:
           accessKey: "46a520a35247ffc72d92c05453221ded6086f156"
