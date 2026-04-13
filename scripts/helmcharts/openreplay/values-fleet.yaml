@@ -128,7 +128,7 @@ global:
   jwtRefreshSecret: "94c939f6ea23fb0d484e0fb7abbedc17e00e5254"
   jwtSpotRefreshSecret: "8447bf78ab5308d06b0eee69e0768a03cf180d8a"
 
-  pvcRWXName: "openreplay-shared-storage"
+  pvcRWXName: "openreplay-shared-storage-lan"
   domainName: "openrelay.dmc.ovh"
   ORSecureAccess: true
   orTmpDir: "/openreplay/storage/nfs"

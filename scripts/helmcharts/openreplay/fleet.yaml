@@ -136,7 +136,7 @@ helm:
       tokenSecret: "0b215e878ced63c8283df4f759b410b475b5f6e4"
       jwtRefreshSecret: "94c939f6ea23fb0d484e0fb7abbedc17e00e5254"
       jwtSpotRefreshSecret: "8447bf78ab5308d06b0eee69e0768a03cf180d8a"
-      pvcRWXName: "openreplay-shared-storage"
+      pvcRWXName: "openreplay-shared-storage-lan"
       domainName: "openreplay.dmc.ovh"
       ORSecureAccess: true
       orTmpDir: "/openreplay/storage/nfs"
