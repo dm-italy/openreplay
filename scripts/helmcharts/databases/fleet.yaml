@@ -52,5 +52,6 @@ helm:
           memory: 128Mi
       persistence:
         enabled: true
+        existingClaim: "minio"
         storageClass: "ceph-dm-cephfs"
         size: 5Gi
